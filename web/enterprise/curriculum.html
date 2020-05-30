@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>简历管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--顶部-->
+    <div class="layui-header">
+        <div class="layui-logo">赣北人才网</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">人才招聘系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">人才招聘系统</a></dd>
+                    <dd><a href="">人力资源管理系统</a></dd>
+                    <dd><a href="">人力资源服务系统</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退出</a></li>
+        </ul>
+    </div>
+    <!--左边竖格-->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item"><a href="jobs.html">职位管理</a></li>
+                <li class="layui-nav-item"><a href="curriculum.html">简历管理</a></li>
+                <li class="layui-nav-item"><a href="interviews.html">面试管理</a></li>
+                <li class="layui-nav-item"><a href="info.html">企业信息</a></li>
+                <li class="layui-nav-item"><a href="score.html">积分</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">收到的简历</li>
+                <li>收藏的简历</li>
+                <li>推荐的简历</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-hide" id="tbl_app" lay-filter="tbl_app"></table>
+                </div>
+                <div class="layui-tab-item">
+                    <table class="layui-hide" id="tbl_favorite" lay-filter="tbl_favorite"></table>
+                </div>
+                <div class="layui-tab-item">
+                    <table class="layui-hide" id="tbl_recommend" lay-filter="tbl_recommend"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        © 九江市杰博人力资源有限公司
+    </div>
+</div>
+</body>
+<!--收藏的简历顶部工具栏-->
+<script type="text/html" id="top_bar_favorite">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value="-1">按期望职位筛选</option>
+                    <option value="0">需要自定义</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value="-1">按性别筛选</option>
+                    <option value="0">男</option>
+                    <option value="1">女</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value="-1">按学历筛选</option>
+                    <option value="0">高中以下</option>
+                    <option value="1">高中</option>
+                    <option value="2">中专</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="deletebatch">批量删除</button>
+
+    </div>
+</script>
+<!--收藏的简历行内工具栏-->
+<script type="text/html" id="bar_curriculum">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="unseale">解封</a>
+    <a class="layui-btn layui-btn-xs" lay-event="invite">邀请面试</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<!--收到的简历顶部工具栏-->
+<script type="text/html" id="top_bar_app">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value="-1">按投递职位筛选</option>
+                    <option value="0">急聘司机</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value="-1">按状态筛选</option>
+                    <option value="0">待受理</option>
+                    <option value="1">已拒绝</option>
+                    <option value="2">已邀请面试</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="inviteBatch">批量邀请面试</button>
+        <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="rejectBatch">批量拒绝</button>
+        <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="">全部（5）</button>
+        <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="">已读（3）</button>
+        <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="">未读（2）</button>
+    </div>
+</script>
+<!--收到的简历行内工具栏-->
+<script type="text/html" id="bar_app">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
+    <a class="layui-btn layui-btn-xs" lay-event="invite">邀请面试</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="reject">拒绝</a>
+</script>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../js/fieldSet.js"></script>
+<script src="../js/interface.js"></script>
+<script>
+    var table;//数据表格对象
+
+    $(function () {
+        initTable();
+    });
+
+    function initTable() {
+        layui.use(['table','element','form'] , function(){
+            table = layui.table;
+            var element = layui.element;
+            var form = layui.form;
+
+            table.render({
+                elem: '#tbl_app',
+                toolbar: '#top_bar_app', //开启头部工具栏，并为其绑定左侧模板
+                defaultToolbar: ['filter', 'exports', 'print'],//自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '简历列表',
+                cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                cols: columns_app,
+                page: true,
+                id: 'tbl_app'
+            });
+
+            table.render({
+                elem: '#tbl_favorite',
+                toolbar: '#top_bar_favorite', //开启头部工具栏，并为其绑定左侧模板
+                defaultToolbar: ['filter', 'exports', 'print'],//自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '简历列表',
+                cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                cols: columns_curriculum,
+                page: true,
+                id: 'tbl_favorite'
+            });
+
+            //监听收到简历表行内工具按钮
+            table.on('tool(tbl_app)', function(obj){
+                var data = obj.data;//获取所在行数据
+                switch (obj.event){
+                    case "detail":
+                        showDetail(data.id);
+                        break;
+                    case "invite":
+                        invite(data.id);
+                        break;
+                    case "reject":
+                        reject(data.id);
+                        break;
+                }
+            });
+
+            //监听收藏简历表行内工具按钮
+            table.on('tool(tbl_favorite)', function(obj){
+                var data = obj.data;//获取所在行数据
+                switch (obj.event){
+                    case "detail":
+                        showDetail(data.id);
+                        break;
+                    case "unseale":
+                        unseale(data.id);
+                        break;
+                    case "invite":
+                        invite(data.id);
+                        break;
+                    case "delete":
+                        deleteConcern(data.id);
+                        break;                        
+                }
+            });
+
+            getApps();
+            getCurriculums();
+        });
+    }
+
+
+
+    function getApps() {
+
+        // var apps = [{id:14,candidate:"张三  男 1988年07月 高中",title:"急聘司机",salary:"¥5000-6500",phone:18900001111,status:"待受理"},{id:32,candidate:"李四  男 1985年12月 大专",title:"高薪聘请起重机司机",salary:"¥5000-8000",phone:"13866663333",status:"已拒绝"},{id:21,candidate:"李景芝 女 1968年06月 高中",title:"招聘保洁",category:"保洁",salary:"¥2000-2500",phone:"13988885555",status:"已邀请面试"}];
+        var apps = iCurriculum.getList(0,onQuerySuccess,onQueryFail);
+        showApps(apps);
+
+        function onQuerySuccess(result) {
+            var apps = result.rows;
+            showApps(apps);
+        }
+        function onQueryFail(result) {
+            layer.msg(result.msg);
+        }
+    }
+
+    function showApps(apps) {
+        table.reload('tbl_app', {
+            data:apps
+        });
+    }
+
+    function getCurriculums() {
+        // var curriculums = [{id:1,name:"张三","sex":"男",birthday:"1988年07月",degree:"高中",phone:"18900001111",positions:"起重车司机|塔吊司机",salary:"¥5000-6500"},{id:2,name:"李四","sex":"男",birthday:"1985年12月",degree:"大专",phone:"13866663333",positions:"公交司机|客车是自己",salary:"¥5000-8000"},{id:3,name:"李景芝","sex":"女",birthday:"1968年06月",degree:"高中",positions:"家政|保洁|钟点工",phone:"13988885555",salary:"¥2000-2500"}];
+        var curriculums = iCurriculum.getList(0,onQuerySuccess,onQueryFail);
+        showCurriculums(curriculums);
+
+        function onQuerySuccess(result) {
+            var curriculums = result.rows;
+            showCurriculums(curriculums);
+        }
+        function onQueryFail(result) {
+            layer.msg(result.msg);
+        }
+    }
+
+    function showCurriculums(curriculums) {
+        table.reload('tbl_favorite', {
+            data:curriculums
+        });
+    }
+
+    /**
+     *
+     * @param cid
+     */
+    function showDetail(cid) {
+        layer.msg(cid);
+    }
+    function unseale(cid) {
+        // layer.msg(cid);
+        iCurriculum.unseal(cid,1,onUnsealeSuccess,onUnsealeFail);
+
+        function onUnsealeSuccess(result) {
+            layer.msg("解封成功");
+        }
+        function onUnsealeFail(result) {
+            layer.msg(result.msg);
+        }
+    }
+    function invite(cid) {
+        iApp.invitation(cid,1,'15945638921','北京','2015-03-16 00:00:00',1,onInviteSuccess,onInviteFail);
+
+        function onInviteSuccess(result) {
+            layer.msg("邀请成功");
+        }
+        function onInviteFail(result) {
+            layer.msg(result.msg);
+        }
+    }
+    function deleteConcern(cid) {
+        iCurriculum.concern(cid,false,1,onConternSuccess,onConternFail);
+
+        function onConternSuccess(result) {
+            layer.msg("取消收藏成功");
+        }
+        function onConternFail(result) {
+            layer.msg(result.msg);
+        }
+    }
+    function reject(cid) {
+        iApp.accept(cid,false,'不合格',1,onRejectSuccess,onRejectFail);
+
+        function onRejectSuccess(result) {
+            layer.msg("拒绝成功");
+        }
+        function onRejectFail(result) {
+            layer.msg(result.msg);
+        }
+    }
+</script>
+</html>

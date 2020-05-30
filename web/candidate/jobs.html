@@ -1,0 +1,217 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>找工作</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../../../train/web/wx/css/public.css"/>
+    <link rel="stylesheet" href="../../../train/web/wx/css/style.css"/>
+    <!--jQuery WeUI 是专为微信公众账号开发而设计的一个简洁而强大的UI库，包含全部WeUI官方的CSS组件，并且额外提供了大量的拓展组件,参考http://jqweui.com/-->
+    <link rel="stylesheet" href="../../../train/web/wx/css/weui.min.css">
+    <link rel="stylesheet" href="../../../train/web/wx/css/jquery-weui.css">
+</head>
+<style>
+    [name=salary]{
+        color: #ff0000;
+        margin-left:110px;
+    }
+    [name=title]{
+        color:#ff0000;
+    }
+    [name=city]{
+        color:darkgray;
+    }
+    [name=degree]{
+        color:darkgray;
+        margin-left:20px;
+    }
+    [name=select]{
+        text-align: center;
+        font-size:large ;
+        color: #0D0D0D;
+}
+</style>
+<body>
+<div class="weui-search-bar" id="searchBar">
+    <form class="weui-search-bar__form">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+        </div>
+        <label class="weui-search-bar__label" id="searchText">
+            <i class="weui-icon-search"></i>
+            <span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+    <a href="javascript:;" class="open-popup" data-target="#content" >☰筛选</a>
+    <div id="content" class="weui-popup__container ">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <h1 name="select">职位筛选</h1>
+            <h>最低期望月薪</h><br>
+            <input type="radio" value="1000元以下" name="type">2000元以上
+            <input type="radio" value="1000-2000元" name="type">4000元以上
+            <input type="radio" value="2000-3000元" name="type">8000元以上<br>
+            <h>福利待遇</h><br>
+            <input type="checkbox" name="五险一金" value="0">五险一金
+            <input type="checkbox" name="包住" value="1">包住
+            <input type="checkbox" name="包住" value="2">包吃<br>
+            <input type="checkbox" name="周末双休" value="3">周末双休
+            <input type="checkbox" name="交通补助" value="4">交通补助
+            <input type="checkbox" name="加班补助" value="5">加班补助<br>
+            <input type="checkbox" name="餐补" value="6">餐补
+            <input type="checkbox" name="话补" value="7">话补
+            <input type="checkbox" name="房补" value="8">房补<br>
+            <h>工作年限</h><br>
+            <input type="radio" value="不限" name="type" checked>不限
+            <input type="radio" value="1年以下" name="type">1年以下
+            <input type="radio" value="1-2年" name="type">1-2年<br>
+            <input type="radio" value="3-5年" name="type">3-5年
+            <input type="radio" value="6-7年" name="type">6-7年
+            <input type="radio" value="8-10年" name="type">8-10年<br>
+            <input type="radio" value="10年以上" name="type">10年以上<br>
+            <h>学历要求</h></br>
+            <input type="radio" value="不限" name="type" checked>不限
+            <input type="radio" value="1年以下" name="type">高中以下
+            <input type="radio" value="1-2年" name="type">高中
+            <input type="radio" value="1-2年" name="type">中专<br>
+            <input type="radio" value="1-2年" name="type">大专
+            <input type="radio" value="1-2年" name="type">本科
+            <input type="radio" value="1-2年" name="type">硕士
+            <input type="radio" value="1-2年" name="type">博士<br>
+            <div class="weui-form__opr-area">
+                <button name="btn_sure" class="large_button" >确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="template" class="hide">
+    <div class="panel" name="job">
+        <p><span name="title">招聘标题</span><span name="salary">薪资</span></p>
+        <p><span name="city">工作城市</span><span name="degree">学历</span></p>
+        <p name="enterprise">公司名称</p>
+        <div class="panel_op">
+            <a class="btn_mini" name="btn_details">查看详情</a>
+            <a class="btn_mini" name="btn_apply">申请</a>
+            <a class="btn_mini" name="btn_collect">收藏</a>
+        </div>
+    </div>
+</div>
+<!--详情弹窗-->
+<div id="popup_detail" class="weui-popup__container popup-bottom">
+    <div class="weui-popup__modal" >
+        <div name="detail" class="panel">
+            <p><span name="title">建筑施工安全员</span><span name="salary">5000-9000元/月</span></p>
+            <p><span name="city">江西-九江</span>|<span name="amount">3-4人</span></p>
+            <p><span name="degree">本科学历</span>|<span name="age">35岁以下</span>|<span name="sex">男</span></p>
+            <p name="experience">有采购一年以上工作经验</p>
+            <p name="skills">沟通能力强、组织能力强、谈判能力强</p>
+            <p name="responsebility">了解各部门物资需求及各种物资的市场供应情况,按照集团和财务部对物资采购成本控制要求，制定物资采购计划,根据库存情况，对各部门的采购申请进行核实，做好周期性计划,采购应做到货比三家，择优录取。对部门提出的申购计划及时提供样板信息供部门参考或由部门提出样板，经比价后提供部门最佳方案,采购物资应严格把关，对不符合质量要求的坚决拒收,认真审核合同款项，按采购流程逐级上报,接待来访业务热情有礼，外出采购注意维护公司利益和声誉，不谋私利,严格遵守财务制度、遵纪守法，在平等互利的基础上开展业务，采购物资尽量做到发票随货同行，交仓管员验收，报账手续要及时准确,完成上级临时交办的其它任务</p>
+            <p name="welfare">交五险</p>
+            <p name="enterprise">中交二航局第三工程有限公司</p>
+            <div class="panel_op">
+                <a class="btn_mini" name="btn_collect">收藏</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="details"></div>
+<div id="jobs"></div>
+<div class="h60"></div>
+<div class="bottom">
+    <div class="weui-tabbar">
+        <a href="jobs.html" class="weui-tabbar__item weui-bar__item_on">
+            <img src="../../../recuitment/web/img/jobs2.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">找工作</p>
+        </a>
+        <a href="curriculums.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/curriculum1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的简历</p>
+        </a>
+        <a href="app.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/app1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的职位</p>
+        </a>
+        <a href="interviews.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/interviews1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">我的面试</p>
+        </a>
+        <a class="weui-tabbar__item" onclick="popupActionSheet()">
+            <img src="../../../recuitment/web/img/more1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">…</p>
+        </a>
+    </div>
+</div>
+</body>
+<script src="../../../train/web/js/jquery.min.js"></script>
+<script src="../../../train/web/wx/js/jquery-weui.js"></script>
+<script src="../../../train/web/js/jquery.params.js"></script>
+<script src="../../../train/web/js/jweixin-1.4.0.js"></script>
+<script src="../../../train/web/js/item.js"></script>
+<script src="../../../train/web/js/fieldSet.js"></script>
+<script src="../../../train/web/js/cookie.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/js/interface.js"></script>
+<script>
+    var jobs = [];
+    $(function() {
+        getJobs();
+    });
+    function getJobs() {
+        jobs = [{title: "淘宝天猫在线客服",salary:"¥3000-4000",city: "江西-九江",degree:"学历不限",amount:"1-2人",age:"35岁以下",sex:"女",welfare:"周末双休，缴纳社保五险",enterprise: "九江网盟"},{title: "建筑施工安全人员", salary:"¥5000-9000", city: "江西-九江", degree: "本科学历",amount:"3-4人",age:"35岁以下",sex:"男",welfare:"交五险", enterprise: "中交二第三工程有限公司"}, {title: "工程施工技术人员",salary:"¥6000-10000",city: "江西-九江",amount:"5-6人",degree:"本科学历",age:"35岁以下",sex:"男",welfare:"交五险",enterprise: "中交二航第三工程有限公司"}];
+        showJobs();
+    }
+    function showJobs() {
+        $("#jobs").empty();//清空
+        for (var i in jobs) {
+            //通过克隆的方法添加元素
+            var node = $("#template [name=job]").clone();
+            $("#jobs").append(node);
+            //显示基本信息
+            var job = jobs[i];
+            node.find("[name=title]").text(job.title);
+            node.find("[name=salary]").text(job.salary);
+            node.find("[name=city]").text(job.city);
+            node.find("[name=degree]").text(job.degree);
+            node.find("[name=enterprise]").text(job.enterprise);
+            node.find("[name=btn_details]").click(function () {
+                var index = $(this).parents("[name=job]").index();
+                var job = jobs[index];
+                showDetail(job);
+            });
+            node.find("[name=btn_apply]");
+            node.find("[name=btn_collect]");
+        }
+    }
+    function showDetail(job) {
+//        $("#popup_detail [name=title]").text(job.title);
+//        $("#popup_detail [name=salary]").text(job.salary);
+//        $("#popup_detail [name=city]").text(job.city);
+//        $("#popup_detail [name=amount]").text(job.amount);
+//        $("#popup_detail [name=degree]").text(job.degree);
+//        $("#popup_detail [name=age]").text(job.age);
+//        $("#popup_detail [name=sex]").text(job.sex);
+//        $("#popup_detail [name=welfare]").text(job.welfare);
+//        $("#popup_detail [name=enterprise]").text(job.enterprise);
+        $("#popup_detail").popup();
+
+    }
+    function popupActionSheet() {
+        $.actions({
+            actions: [{
+                text: "工资查询",
+                onClick: function() {
+                    window.location.href = "salary.html";
+                }
+            },{
+                text: "我的积分",
+                onClick: function() {
+                    window.location.href = "score.html";
+                }
+            }]
+        });
+    }
+    </script>
+</html>

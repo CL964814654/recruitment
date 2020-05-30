@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的积分</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../../../train/web/wx/css/public.css"/>
+    <link rel="stylesheet" href="../../../train/web/wx/css/style.css"/>
+    <!--jQuery WeUI 是专为微信公众账号开发而设计的一个简洁而强大的UI库，包含全部WeUI官方的CSS组件，并且额外提供了大量的拓展组件,参考http://jqweui.com/-->
+    <link rel="stylesheet" href="../../../train/web/wx/css/weui.min.css">
+    <link rel="stylesheet" href="../../../train/web/wx/css/jquery-weui.css">
+    <style>
+        [name=panel]{
+            background-color: goldenrod;
+        }
+        [name=current]{
+            color: white;
+            font-size: larger;
+        }
+        [name=rest]{
+            font-size: xx-large;
+            color: white;
+        }
+        [name=record]{
+            float: left;
+            color: #0D0D0D;
+            margin-left:10px;
+        }
+        [name=date]{
+            text-align: left;
+            color: darkgray;
+            margin-left:10px;
+            font-size: small;
+        }
+        [name=quantity]{
+            float: right;
+            color: goldenrod;
+            margin-right:10px;//右边距
+
+        }
+        .weui-tab{
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+<div id="template" class="hide">
+    <div class="panel" name="score">
+        <p><span name="record">积分明细</span><span name="quantity">积分变化</span></p><br>
+        <p name="date">产生日期</p>
+    </div>
+</div>
+<div class="panel center" name="panel">
+    <p name="current">当前积分</p>
+    <p name="rest"></p>
+</div>
+<div class="weui-tab" name="tabbar">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" onclick="getScores(this,0)" >
+            获取积分
+        </a>
+        <a class="weui-navbar__item" onclick="getScores(this,1)" >
+            支出积分
+        </a>
+    </div>
+</div>
+<div id="scores"></div>
+<div class="h60"></div>
+<div class="bottom">
+    <div class="weui-tabbar">
+        <a href="jobs.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/jobs1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">找工作</p>
+        </a>
+        <a href="curriculums.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/curriculum1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">我的简历</p>
+        </a>
+        <a href="app.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/app1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的职位</p>
+        </a>
+        <a href="jobs.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/interviews1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的面试</p>
+        </a>
+        <a class="weui-tabbar__item weui-bar__item_on" onclick="popupActionSheet()">
+            <img src="../../../recuitment/web/img/more2.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">…</p>
+        </a>
+    </div>
+</div>
+</body>
+<script src="../../../train/web/js/jweixin-1.4.0.js"></script>
+<script src="../../../train/web/js/jquery.min.js"></script>
+<script src="../../../train/web/wx/js/jquery-weui.js"></script>
+<script src="../../../train/web/js/jquery.params.js"></script>
+<script src="../../../train/web/js/item.js"></script>
+<script src="../../../train/web/js/fieldSet.js"></script>
+<script src="../../../train/web/js/cookie.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/js/interface.js"></script>
+<script>
+    var rest = 0;//当前积分
+    var scores=[];//积分明细
+    $(function() {
+        getRest();
+        getScores(null,0);//初始化this为空
+    });
+
+    function getRest() {
+        rest = 120;
+        showRest();
+    }
+    function getScores(navbar,status) {
+        if(navbar!=null) {//如果选中的状态不为空
+            $(".weui-bar__item--on").removeClass("weui-bar__item--on");//则去除当前的
+            $(navbar).addClass("weui-bar__item--on");//再给所选中的
+        }
+        //判断所处的状态来进行选择性的显示
+        switch (status) {
+            case 0://获取积分
+                scores = [{record: "登录获得积分",date:"2020-05-02",quantity:"+5"},{record: "查看公告获得积分",date:"2020-05-02",quantity:"+2"}];
+                break;
+            case 1://支出积分
+                scores = [{record: "刷新简历",date:"2020-05-01",quantity:"-4"},{record: "置顶简历",date:"2020-05-01",quantity:"-5"}];
+                break;
+        }
+        showScores();
+    }
+
+    function showRest() {
+        $("[name=rest]").text(rest);
+    }
+    function showScores() {
+        $("#scores").empty();//清空
+        for (var i in scores) {
+            //通过克隆的方法添加元素
+            var node = $("#template [name=score]").clone();
+            $("#scores").append(node);
+            //显示基本信息
+            var score = scores[i];
+            node.find("[name=record]").text(score.record);
+            node.find("[name=date]").text(score.date);
+            node.find("[name=quantity]").text(score.quantity);
+        }
+    }
+    function popupActionSheet() {
+        $.actions({
+            actions: [{
+                text: "工资查询",
+                onClick: function() {
+                    window.location.href = "salary.html";
+                }
+            },{
+                text: "我的积分",
+                onClick: function() {
+                    window.location.href = "score.html";
+                }
+            }]
+        });
+    }
+</script>
+</html>

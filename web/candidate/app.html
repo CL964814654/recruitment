@@ -1,0 +1,182 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的职位</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../../../train/web/wx/css/public.css"/>
+    <link rel="stylesheet" href="../../../train/web/wx/css/style.css"/>
+    <!--jQuery WeUI 是专为微信公众账号开发而设计的一个简洁而强大的UI库，包含全部WeUI官方的CSS组件，并且额外提供了大量的拓展组件,参考http://jqweui.com/-->
+    <link rel="stylesheet" href="../../../train/web/wx/css/weui.min.css">
+    <link rel="stylesheet" href="../../../train/web/wx/css/jquery-weui.css">
+    <style>
+        .weui-tab{
+            height:60px;
+        }
+        [name=salary]{
+            color: #ff0000;
+            margin-left:110px;
+        }
+        [name=title]{
+            color:#ff0000;
+        }
+        [name=city]{
+            color:darkgray;
+        }
+        [name=degree]{
+            color:darkgray;
+            margin-left:20px;
+        }
+        [name=enterprise]{
+            color:darkgray;
+        }
+    </style>
+</head>
+<body>
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" onclick="getApps(this,0)">
+            申请
+        </a>
+        <a class="weui-navbar__item"  onclick="getApps(this,1)">
+            收藏
+        </a>
+    </div>
+</div>
+<div id="template" class="hide">
+    <div class="panel" name="app">
+        <p><span name="title">招聘标题</span><span name="salary">薪资</span></p>
+        <p><span name="city">工作城市</span><span name="degree">学历</span></p>
+        <p name="enterprise">公司名称</p>
+        <div class="panel_op">
+            <a class="btn_mini" name="btn_detail">查看详情</a>
+            <a class="btn_mini hide" name="btn_recall">撤回</a>
+            <a class="btn_mini hide" name="btn_apply">申请</a>
+            <a class="btn_mini hide" name="btn_delete">删除</a>
+        </div>
+    </div>
+</div>
+<!--详情弹窗-->
+<div id="popup_detail" class="weui-popup__container popup-bottom">
+    <div class="weui-popup__modal" >
+        <div name="detail" class="panel">
+            <p><span name="title">建筑施工安全员</span><span name="salary">5000-9000元/月</span></p>
+            <p><span name="city">江西-九江</span>|<span name="amount">3-4人</span></p>
+            <p><span name="degree">本科学历</span>|<span name="age">35岁以下</span>|<span name="sex">男</span></p>
+            <p name="experience">有采购一年以上工作经验</p>
+            <p name="skills">沟通能力强、组织能力强、谈判能力强</p>
+            <p name="responsebility">了解各部门物资需求及各种物资的市场供应情况,按照集团和财务部对物资采购成本控制要求，制定物资采购计划,根据库存情况，对各部门的采购申请进行核实，做好周期性计划,采购应做到货比三家，择优录取。对部门提出的申购计划及时提供样板信息供部门参考或由部门提出样板，经比价后提供部门最佳方案,采购物资应严格把关，对不符合质量要求的坚决拒收,认真审核合同款项，按采购流程逐级上报,接待来访业务热情有礼，外出采购注意维护公司利益和声誉，不谋私利,严格遵守财务制度、遵纪守法，在平等互利的基础上开展业务，采购物资尽量做到发票随货同行，交仓管员验收，报账手续要及时准确,完成上级临时交办的其它任务</p>
+            <p name="welfare">交五险</p>
+            <p name="enterprise">中交二航局第三工程有限公司</p>
+        </div>
+    </div>
+</div>
+<div id="apps"></div>
+<div class="h60"></div>
+<div class="bottom">
+    <div class="weui-tabbar">
+        <a href="jobs.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/jobs1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">找工作</p>
+        </a>
+        <a href="curriculums.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/curriculum1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的简历</p>
+        </a>
+        <a href="app.html" class="weui-tabbar__item weui-bar__item_on">
+            <img src="../../../recuitment/web/img/app2.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">我的职位</p>
+        </a>
+        <a href="interviews.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/interviews1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">我的面试</p>
+        </a>
+
+        <a class="weui-tabbar__item" onclick="popupActionSheet()">
+            <img src="../../../recuitment/web/img/more1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">…</p>
+        </a>
+    </div>
+</div>
+</body>
+<script src="../../../train/web/js/jweixin-1.4.0.js"></script>
+<script src="../../../train/web/js/jquery.min.js"></script>
+<script src="../../../train/web/wx/js/jquery-weui.js"></script>
+<script src="../../../train/web/js/jquery.params.js"></script>
+<script src="../../../train/web/js/item.js"></script>
+<script src="../../../train/web/js/fieldSet.js"></script>
+<script src="../../../train/web/js/cookie.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/js/interface.js"></script>
+<script>
+    var apps=[];
+    $(function() {
+        getApps(null,0);//初始化this为空
+    });
+    //获取面试中的信息
+    function getApps(navbar,status) {//传两个参数
+        //动态修改tabbar（导航栏）的选中状态
+        if(navbar!=null) {//如果选中的状态不为空
+            $(".weui-bar__item--on").removeClass("weui-bar__item--on");//则去除当前的
+            $(navbar).addClass("weui-bar__item--on");//再给所选中的
+        }
+        //判断所处的状态来进行选择性的显示
+        switch (status) {
+            case 0://申请
+                apps = [{title: "建筑施工安全人员", salary:"¥5000-9000", city: "江西-九江", degree: "本科学历", enterprise: "中交二航第三工程有限公司", status: 0}, {title: "淘宝天猫在线客服",salary:"¥3000-4000",city: "江西-九江",degree:"学历不限",enterprise: "九江网盟",status: 0}, {title: "工程施工技术人员",salary:"¥6000-10000",city: "江西-九江",degree:"本科学历",enterprise: "中交二航第三工程有限公司",status: 0}];
+                break;
+            case 1://收藏
+                apps = [{title: "建筑施工安全人员",salary:"¥5000-9000",city: "江西-九江",degree: "本科学历",enterprise: "中交二航第三工程有限公司",status:1}, {title: "工程施工技术人员",salary: "¥6000-10000",city: "江西-九江",degree: "本科学历",enterprise: "中交二航第三工程有限公司",status: 1}];
+                break;
+        }
+        showApps();
+    }
+    //显示面试中的信息
+    function showApps() {
+        $("#apps").empty();//清空
+        for (var i in apps) {
+            //通过克隆的方法添加元素
+            var node = $("#template [name=app]").clone();
+            $("#apps").append(node);
+            //显示基本信息
+            var app = apps[i];
+            node.find("[name=title]").text(app.title);
+            node.find("[name=salary]").text(app.salary);
+            node.find("[name=city]").text(app.city);
+            node.find("[name=degree]").text(app.degree);
+            node.find("[name=enterprise]").text(app.enterprise);
+            node.find("[name=btn_detail]").click(function () {
+                showDetail();
+            });
+            //根据状态显示不同的按钮
+            switch (app.status){
+                case 0://申请
+                    node.find("[name=btn_recall]").removeClass("hide");
+                    break;
+                case 1://收藏
+                    node.find("[name=btn_apply]").removeClass("hide");
+                    node.find("[name=btn_delete]").removeClass("hide");
+                    break;
+            }
+        }
+    }
+    function showDetail() {
+        $("#popup_detail").popup();
+    }
+    function popupActionSheet() {
+        $.actions({
+            actions: [{
+                text: "工资查询",
+                onClick: function() {
+                    window.location.href = "salary.html";
+                }
+            },{
+                text: "我的积分",
+                onClick: function() {
+                    window.location.href = "score.html";
+                }
+            }]
+        });
+    }
+</script>
+</html>

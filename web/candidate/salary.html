@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工资查询</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../../../train/web/wx/css/public.css"/>
+    <link rel="stylesheet" href="../../../train/web/wx/css/style.css"/>
+    <!--jQuery WeUI 是专为微信公众账号开发而设计的一个简洁而强大的UI库，包含全部WeUI官方的CSS组件，并且额外提供了大量的拓展组件,参考http://jqweui.com/-->
+    <link rel="stylesheet" href="../../../train/web/wx/css/weui.min.css">
+    <link rel="stylesheet" href="../../../train/web/wx/css/jquery-weui.css">
+    <style>
+        .weui-cells  {
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">身份证号</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入身份证号">
+        </div>
+    </div>
+    <div class="weui-form__opr-area">
+        <button name="btn_save" class="large_button">查询</button>
+    </div>
+</div>
+<div class="h60"></div>
+<div class="bottom">
+    <div class="weui-tabbar">
+        <a href="jobs.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/jobs1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">找工作</p>
+        </a>
+        <a href="curriculums.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/curriculum1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">我的简历</p>
+        </a>
+        <a href="app.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/app1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的职位</p>
+        </a>
+        <a href="jobs.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/interviews1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的面试</p>
+        </a>
+        <a class="weui-tabbar__item weui-bar__item_on" onclick="popupActionSheet()">
+            <img src="../../../recuitment/web/img/more2.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">…</p>
+        </a>
+    </div>
+</div>
+</body>
+<script src="../../../train/web/js/jweixin-1.4.0.js"></script>
+<script src="../../../train/web/js/jquery.min.js"></script>
+<script src="../../../train/web/wx/js/jquery-weui.js"></script>
+<script src="../../../train/web/js/jquery.params.js"></script>
+<script src="../../../train/web/js/item.js"></script>
+<script src="../../../train/web/js/fieldSet.js"></script>
+<script src="../../../train/web/js/cookie.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/js/interface.js"></script>
+<script>
+    function popupActionSheet() {
+        $.actions({
+            actions: [{
+                text: "工资查询",
+                onClick: function() {
+                    window.location.href = "salary.html";
+                }
+            },{
+                text: "我的积分",
+                onClick: function() {
+                    window.location.href = "score.html";
+                }
+            }]
+        });
+    }
+</script>
+</html>

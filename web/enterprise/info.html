@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>企业信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <style>
+        .site-block {
+            margin-top: 10px;
+            padding: 20px;
+            border: 1px solid #eee;
+        }
+        .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+        .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+    </style>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">赣北人才网</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">人才招聘系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">人才招聘系统</a></dd>
+                    <dd><a href="">人力资源管理系统</a></dd>
+                    <dd><a href="">人力资源服务系统</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item"><a href="jobs.html">职位管理</a></li>
+                <li class="layui-nav-item"><a href="curriculum.html">简历管理</a></li>
+                <li class="layui-nav-item"><a href="interviews.html">面试管理</a></li>
+                <li class="layui-nav-item"><a href="info.html">企业信息</a></li>
+                <li class="layui-nav-item"><a href="score.html">积分</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">基本信息</li>
+                <li>认证推荐</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form site-block" action="">
+                        <div class="layui-row">
+                            <div class="layui-col-xs4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">社会信用代码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入社会信用代码" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">企业名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入企业名称" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">企业性质</label>
+                                    <div class="layui-input-inline">
+                                        <select name="interest" lay-filter="aihao">
+                                            <option value="">选择企业性质</option>
+                                            <option value="0">外资企业</option>
+                                            <option value="1" selected="">民营企业</option>
+                                            <option value="2">股份制企业</option>
+                                            <option value="3">集体企业</option>
+                                            <option value="4">上市公司</option>
+                                            <option value="5">国家机关</option>
+                                            <option value="6">事业单位</option>
+                                            <option value="7">其它</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">所属行业</label>
+                                    <div class="layui-input-inline">
+                                        <select name="interest" lay-filter="aihao">
+                                            <option value="">需自定义</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">企业规模</label>
+                                    <div class="layui-input-inline">
+                                        <select name="interest" lay-filter="aihao">
+                                            <option value="">选择企业规模</option>
+                                            <option value="0">10人以下</option>
+                                            <option value="1" selected="">10-50人</option>
+                                            <option value="2">50-200人</option>
+                                            <option value="3">200-500人</option>
+                                            <option value="4">500-1000人</option>
+                                            <option value="5">1000人以上</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">电子邮箱</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="mail" lay-verify="mail" autocomplete="off" placeholder="请输入电子邮箱地址" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">官网地址</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="url" lay-verify="title" autocomplete="off" placeholder="请输入官网地址" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">所在城市</label>
+                                    <div class="layui-input-inline" style="width: 90px;">
+                                        <select name="quiz1">
+                                            <option value="">择省</option>
+                                            <option value="浙江" selected="">浙江省</option>
+                                            <option value="你的工号">江西省</option>
+                                            <option value="你最喜欢的老师">福建省</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 90px;">
+                                        <select name="quiz2">
+                                            <option value="">市</option>
+                                            <option value="杭州">杭州</option>
+                                            <option value="宁波" disabled="">宁波</option>
+                                            <option value="温州">温州</option>
+                                            <option value="温州">台州</option>
+                                            <option value="温州">绍兴</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 90px;">
+                                        <select name="quiz3">
+                                            <option value="">县/区</option>
+                                            <option value="西湖区">西湖区</option>
+                                            <option value="余杭区">余杭区</option>
+                                            <option value="拱墅区">临安市</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">详细地址</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入详细地址" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">联系人</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入负责招聘的联系人姓名" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">联系电话</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入联系电话" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs8">
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">企业简介</label>
+                                    <div class="layui-input-inline">
+                                        <textarea placeholder="请输入企业简介，让求职者更好地了解你们" class="layui-textarea" style="width:500px;height: 250px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">企业地图</label>
+                                    <div style="width:500px;height:300px;border:#ccc solid 1px;" id="dituContent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-tab-item">
+                    <div style="padding: 20px; background-color: #F2F2F2;">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-md12">
+                                <div class="layui-card">
+                                    <div class="layui-card-header">
+                                        认证
+                                        <span class="layui-badge layui-bg-gray">未认证</span>
+                                    </div>
+                                    <div class="layui-card-body">
+                                        <p>论认证有助于提高求职者对企业发布职位的信任程度</p>
+                                        <div class="layui-upload-drag" id="test10">
+                                            <i class="layui-icon"></i>
+                                            <p>点击上传企业营业执照，或将文件拖拽到此处</p>
+                                            <div class="layui-hide" id="uploadDemoView">
+                                                <hr>
+                                                <img src="" alt="上传成功后渲染" style="width: 400px;height: 300px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md12">
+                                <div class="layui-card">
+                                    <div class="layui-card-header">
+                                        推荐
+                                        <span class="layui-badge layui-bg-orange">推荐中</span>
+                                    </div>
+                                    <div class="layui-card-body">
+                                        <p>经过推荐的企业将在平台的推荐专栏显示，有助于提高企业的曝光度</p>
+                                        <table class="layui-hide" id="tbl_recommend"></table>
+                                        <p>请联系平台工作人员</p>
+                                        <p>联系电话：0792-8888888</p>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/html" id="top_bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData"><i class="layui-icon layui-icon-addition"></i> 申请推荐</button>
+    </div>
+</script>
+
+</body>
+<script src="../layui/layui.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=2.0&ak=qYTTn2P9mItvDSVtbs7xmHaVOSRjq88i"></script>
+<script src="../js/fieldSet.js"></script>
+<script>
+    var $;//引用layui的jQuery
+    var table;
+
+    //标注点数组
+    var markerArr = [{title:"公司地址",content:"成都市天府四街携程信息技术大楼",point:"104.071656|30.547942",isOpen:1,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+    ];
+
+    layui.use(['table','form','element', 'layedit', 'laydate','upload'], function(){
+        $ = layui.jquery;
+        table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+        var layer = layui.layer;
+        var layedit = layui.layedit;
+        var laydate = layui.laydate;
+        var upload = layui.upload;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,pass: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function(data){
+            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function(){
+            form.val('example', {
+                "username": "贤心" // "name": "value"
+                ,"password": "123456"
+                ,"interest": 1
+                ,"like[write]": true //复选框选中状态
+                ,"close": true //开关状态
+                ,"sex": "女"
+                ,"desc": "我爱 layui"
+            });
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+        //拖拽上传
+        upload.render({
+            elem: '#test10'
+            ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+            ,done: function(res){
+                layer.msg('上传成功');
+                layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.files.file);
+                console.log(res)
+            }
+        });
+
+        table.render({
+            elem: '#tbl_recommend',
+            toolbar: '#top_bar',
+            defaultToolbar: [],
+            width:344,
+            cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            cols: columns_recommend,
+            id: 'tbl_recommend'
+        });
+        getRecommends();
+    });
+
+    function getRecommends() {
+        var recommends = [{start:"2020-05-06",days:"7",status:"推荐中"},{start:"2020-03-20",days:"10",status:"已过期"}];
+
+        showRecommends(recommends);
+    }
+
+    function showRecommends(recommends) {
+        table.reload('tbl_recommend', {
+            data:recommends
+        });
+    }
+
+    initMap();//创建和初始化地图
+
+    //创建和初始化地图函数：
+    function initMap(){
+        createMap();//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+        addMarker();//向地图中添加marker
+    }
+
+    //创建地图函数：
+    function createMap(){
+        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        var point = new BMap.Point(104.071656,30.547942);//定义一个中心点坐标
+        map.centerAndZoom(point,10);//设定地图的中心点和坐标并将地图显示在地图容器中
+        window.map = map;//将map变量存储在全局
+    }
+
+    //地图事件设置函数：
+    function setMapEvent(){
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();//启用键盘上下左右键移动地图
+    }
+
+    //地图控件添加函数：
+    function addMapControl(){
+        //向地图中添加缩放控件
+        var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+        map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+        var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+        map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+        var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+        map.addControl(ctrl_sca);
+    }
+
+
+    //创建marker
+    function addMarker(){
+        for(var i=0;i<markerArr.length;i++){
+            var json = markerArr[i];
+            var p0 = json.point.split("|")[0];
+            var p1 = json.point.split("|")[1];
+            var point = new BMap.Point(p0,p1);
+            var iconImg = createIcon(json.icon);
+            var marker = new BMap.Marker(point,{icon:iconImg});
+            var iw = createInfoWindow(i);
+            var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+            marker.setLabel(label);
+            map.addOverlay(marker);
+            label.setStyle({
+                borderColor:"#808080",
+                color:"#333",
+                cursor:"pointer"
+            });
+
+            (function(){
+                var index = i;
+                var _iw = createInfoWindow(i);
+                var _marker = marker;
+                _marker.addEventListener("click",function(){
+                    this.openInfoWindow(_iw);
+                });
+                _iw.addEventListener("open",function(){
+                    _marker.getLabel().hide();
+                })
+                _iw.addEventListener("close",function(){
+                    _marker.getLabel().show();
+                })
+                label.addEventListener("click",function(){
+                    _marker.openInfoWindow(_iw);
+                })
+                if(!!json.isOpen){
+                    label.hide();
+                    _marker.openInfoWindow(_iw);
+                }
+            })()
+        }
+    }
+    //创建InfoWindow
+    function createInfoWindow(i){
+        var json = markerArr[i];
+        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+        return iw;
+    }
+    //创建一个Icon
+    function createIcon(json){
+        var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        return icon;
+    }
+
+
+</script>
+</html>

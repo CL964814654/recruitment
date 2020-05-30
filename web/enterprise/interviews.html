@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>面试管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">Job直聘</div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a href="javascript:;">人才招聘系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">人才招聘系统</a></dd>
+                    <dd><a href="">人力资源管理系统</a></dd>
+                    <dd><a href="">人力资源服务系统</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item"><a href="jobs.html">职位管理</a></li>
+                <li class="layui-nav-item"><a href="curriculum.html">简历管理</a></li>
+                <li class="layui-nav-item"><a href="interviews.html">面试管理</a></li>
+                <li class="layui-nav-item"><a href="info.html">企业信息</a></li>
+                <li class="layui-nav-item"><a href="score.html">积分</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <table class="layui-hide" id="tbl_interview"></table>
+    </div>
+
+    <div class="layui-footer">
+        © 九江市杰博人力资源有限公司
+    </div>
+</div>
+</body>
+<!--顶部工具栏-->
+<script type="text/html" id="top_bar">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value="-1">按招聘职位筛选</option>
+                    <option value="0">急聘司机</option>
+                    <option value="0">招聘保洁</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value="-1">按状态筛选</option>
+                    <option value="0">邀请中</option>
+                    <option value="0">面试中</option>
+                    <option value="0">已录用</option>
+                    <option value="0">不录用</option>
+                    <option value="0">已拒绝</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="layui-btn-container">
+
+    </div>
+</script>
+<!--行内工具栏-->
+<script type="text/html" id="bar_interview">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">简历详情</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">职位详情</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">录用</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">拒绝</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">同意面试</a>
+</script>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../js/fieldSet.js"></script>
+<script>
+    var table;//数据表格对象
+
+    $(function () {
+        initTable();
+    });
+
+    function initTable() {
+        layui.use(['table','element','form'] , function(){
+            table = layui.table;
+            var element = layui.element;
+            var form = layui.form;
+
+            table.render({
+                elem: '#tbl_interview',
+                toolbar: '#top_bar', //开启头部工具栏，并为其绑定左侧模板
+                defaultToolbar: ['filter', 'exports', 'print'],//自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '简历列表',
+                cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                cols: columns_interview,
+                page: true,
+                id: 'tbl_interview'
+            });
+
+            getInterviews();
+        });
+    }
+
+    function getInterviews() {
+        var interviews = [{candidate:"张三  男 1988年07月 高中",title:"急聘司机",salary:"¥5000-6500",time:"2020-4-20 10:30",address:"九江市濂溪区前进东路121号",phone:18900001111,status:"邀请中"},{candidate:"李四  男 1985年12月 大专",title:"高薪聘请起重机司机",time:"2020-5-4 9:00",address:"九江市濂溪区前进东路121号",phone:"13866663333",status:"已拒绝"},{candidate:"李景芝 女 1968年06月 高中",title:"招聘保洁",category:"保洁",time:"2020-5-10 10:00",address:"九江市濂溪区前进东路121号",phone:"13988885555",status:"已录用"}];
+
+        showInterviews(interviews);
+    }
+
+    function showInterviews(interviews) {
+        table.reload('tbl_interview', {
+            data:interviews
+        });
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>我的面试</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../../../train/web/wx/css/public.css"/>
+    <link rel="stylesheet" href="../../../train/web/wx/css/style.css"/>
+    <!--jQuery WeUI 是专为微信公众账号开发而设计的一个简洁而强大的UI库，包含全部WeUI官方的CSS组件，并且额外提供了大量的拓展组件,参考http://jqweui.com/-->
+    <link rel="stylesheet" href="../../../train/web/wx/css/weui.min.css">
+    <link rel="stylesheet" href="../../../train/web/wx/css/jquery-weui.css">
+    <style>
+        .weui-tab{
+            height:60px;
+        }
+        [name=enterprise]{
+            color: #ff0000;
+        }
+        [name=title]{
+            color:#ff0000;
+        }
+        [name=reason]{
+            color:#ff0000;
+        }
+    </style>
+</head>
+<body>
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" onclick="getInterviews(this,0)">
+            邀请中
+        </a>
+        <a class="weui-navbar__item"  onclick="getInterviews(this,2)">
+            面试中
+        </a>
+        <a class="weui-navbar__item"  onclick="getInterviews(this,3)">
+            已录用
+        </a>
+        <a class="weui-navbar__item"  onclick="getInterviews(this,4)">
+            不录用
+        </a>
+        <a class="weui-navbar__item"  onclick="getInterviews(this,1)">
+            拒绝
+        </a>
+    </div>
+</div>
+<div id="template" class="hide">
+    <div class="panel" name="interview">
+        <p name="enterprise">公司名称</p>
+        <p name="title">招聘标题</p>
+        <p name="time" class="hide">面试时间</p>
+        <p name="address">地址</p>
+        <p><span name="contact">联系人</span>(<span name="phone">电话</span>)</p>
+        <p name="reason" class="hide">原因</p>
+        <div class="panel_op">
+            <a class="btn_mini hide" name="btn_accept">接受</a>
+            <a class="btn_mini hide" name="btn_refuse">拒绝</a>
+        </div>
+    </div>
+</div>
+<div id="interviews"></div>
+<div class="h60"></div>
+<div class="bottom">
+    <div class="weui-tabbar">
+        <a href="jobs.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/jobs1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">找工作</p>
+        </a>
+        <a href="curriculums.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/curriculum1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的简历</p>
+        </a>
+        <a href="app.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/app1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的职位</p>
+        </a>
+        <a href="interviews.html" class="weui-tabbar__item weui-bar__item_on">
+            <img src="../../../recuitment/web/img/interviews2.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">我的面试</p>
+        </a>
+        <a class="weui-tabbar__item" onclick="popupActionSheet()">
+            <img src="../../../recuitment/web/img/more1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">…</p>
+        </a>
+    </div>
+</div>
+</body>
+<script src="../../../train/web/js/jweixin-1.4.0.js"></script>
+<script src="../../../train/web/js/jquery.min.js"></script>
+<script src="../../../train/web/wx/js/jquery-weui.js"></script>
+<script src="../../../train/web/js/jquery.params.js"></script>
+<script src="../../../train/web/js/item.js"></script>
+<script src="../../../train/web/js/fieldSet.js"></script>
+<script src="../../../train/web/js/cookie.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/js/interface.js"></script>
+<script>
+    var interviews=[];
+    $(function() {
+        getInterviews(null,0);//初始化this为空
+    });
+    //获取面试中的信息
+    function getInterviews(navbar,status) {//传两个参数
+        //动态修改tabbar的选中状态
+        if(navbar!=null) {//如果选中的状态不为空
+            $(".weui-bar__item--on").removeClass("weui-bar__item--on");//则去除之前对导航栏的选择
+            $(navbar).addClass("weui-bar__item--on");//再选中选择所选中的导航栏
+        }
+        //判断所处的状态来进行选择性的显示信息
+        switch (status){
+            case 0://邀请中
+                interviews = [{enterprise:"中交二航第三工程有限公司",title:"建筑施工安全员",time:"2020年5月1日（周五）9:00 pm",address:"江苏省镇江市南徐大道238号",contact:"李先生",phone:"18159687654",status:0,reason:""},{enterprise:"九江经开区禾田环境有限公司",title:"采购员",time:"2020年4月30日（周四）2:00 am",address:"江西省九江市九江经济技术开发区七里湖街道市容环境卫生管理所",contact:"周先生",phone:"15269837456",status:0,reason:""},{enterprise:"九江网盟",title:"淘宝天猫客服",time:"2020年4月29日（周三）9:00 pm",address:"江西省九江市庐山区十里大道",contact:"张先生",phone:"15270568945",status:0,reason:""}];
+                break;
+            case 1://拒绝
+                interviews = [{enterprise:"九江网盟",title:"淘宝天猫客服",time:"",address:"江西省九江市庐山区十里大道",contact:"张先生",phone:"15270568945",status:1,reason:"已经决定去其他企业面试"}];
+                break;
+            case 2://面试中
+                interviews = [{enterprise:"中交二航第三工程有限公司",title:"建筑施工安全员",time:"",address:"江苏省镇江市南徐大道238号",contact:"李先生",phone:"18159687654",status:2,reason:""},{enterprise:"九江经开区禾田环境有限公司",title:"采购员",time:"",address:"江西省九江市九江经济技术开发区七里湖街道市容环境卫生管理所",contact:"周先生",phone:"15269837456",status:2,reason:""}];
+                break;
+            case 3://已录用
+                interviews = [{enterprise:"中交二航第三工程有限公司",title:"建筑施工安全员",time:"",address:"江苏省镇江市南徐大道238号",contact:"李先生",phone:"18159687654",status:3,reason:""}];
+                break;
+            case 4://不录用
+                interviews = [{enterprise:"九江经开区禾田环境有限公司",title:"采购员",time:"",address:"江西省九江市九江经济技术开发区七里湖街道市容环境卫生管理所",contact:"周先生",phone:"15269837456",status:4,reason:"简历过长，说不出喜欢这份工作的原因"}];
+                break;
+        }
+        showInterviews();
+    }
+    //显示面试中的信息
+    function showInterviews() {
+        $("#interviews").empty();//清空
+        for (var i in interviews) {
+            //通过克隆的方法添加元素
+            var node = $("#template [name=interview]").clone();
+            $("#interviews").append(node);
+            //显示基本信息
+            var interview = interviews[i];
+            node.find("[name=enterprise]").text(interview.enterprise);
+            node.find("[name=title]").text(interview.title);
+            node.find("[name=time]").text(interview.time);
+            node.find("[name=address]").text(interview.address);
+            node.find("[name=contact]").text(interview.contact);
+            node.find("[name=phone]").text(interview.phone);
+            //如果存在不录用或者拒绝的原因则显示
+            if(interview.reason.length>0){
+                node.find("[name=reason]").text(interview.reason).removeClass("hide");
+            }
+            //如果存在邀请中的时间则显示
+            if(interview.time.length>0){
+                node.find("[name=time]").text(interview.time).removeClass("hide");
+            }
+            //根据状态显示不同的按钮
+            switch (interview.status){
+                case 0://邀请中
+                    node.find("[name=btn_accept]").removeClass("hide");
+                    node.find("[name=btn_refuse]").removeClass("hide");
+                    break;
+                case 2://面试中
+                    node.find("[name=btn_refuse]").removeClass("hide");
+                    break;
+            }
+        }
+    }
+
+    function popupActionSheet() {
+        $.actions({
+            actions: [{
+                text: "工资查询",
+                onClick: function() {
+                    window.location.href = "salary.html";
+                }
+            },{
+                text: "我的积分",
+                onClick: function() {
+                    window.location.href = "score.html";
+                }
+            }]
+        });
+    }
+</script>
+</html>

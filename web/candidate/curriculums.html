@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的简历</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../../../train/web/wx/css/public.css"/>
+    <link rel="stylesheet" href="../../../train/web/wx/css/style.css"/>
+    <!--jQuery WeUI 是专为微信公众账号开发而设计的一个简洁而强大的UI库，包含全部WeUI官方的CSS组件，并且额外提供了大量的拓展组件,参考http://jqweui.com/-->
+    <link rel="stylesheet" href="../../../train/web/wx/css/weui.min.css">
+    <link rel="stylesheet" href="../../../train/web/wx/css/jquery-weui.css">
+    <style>
+        [name=content]{
+            color: #0D0D0D;
+            font-size: 101%;
+        }
+    </style>
+</head>
+<body>
+<!--容器-->
+    <div class="weui-tab">
+        <div class="weui-navbar">
+            <a class="weui-navbar__item weui-bar__item--on" href="#candidate">
+                基本信息
+            </a>
+            <a class="weui-navbar__item" href="#curriculum">
+                求职信息
+            </a>
+            <a class="weui-navbar__item" href="#education">
+                教育经历
+            </a>
+            <a class="weui-navbar__item" href="#work">
+                工作经历
+            </a>
+        </div><!--顶部导航栏-->
+        <div class="weui-tab__bd">
+            <!--基本信息-->
+            <div id="candidate" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="weui-form">
+                    <div class="weui-form__control-area">
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">姓&emsp;&emsp;名</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="name" class="weui-input" placeholder="请输入姓名" maxlength="4"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell ">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">性&emsp;&emsp;别</label>
+                                </div>
+                                    <input type="radio" checked="checked" name="sex" value="0" />男
+                                    <input type="radio"  name="sex" value="1"/>女
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label for="" class="weui-label">出生年月</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input  name="birthday" class="weui-input" type="date" value="">
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">籍&emsp;&emsp;贯</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input  id="native" class="weui-input" placeholder="请选择籍贯">
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">现居住地</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input  id="address" class="weui-input" placeholder="请选择城市"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">学&emsp;&emsp;历</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="degree" class="weui-input" placeholder="选择学历层次"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">手机号码</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="phone" class="weui-input" placeholder="请输入电话号码"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">工作年限</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="years" class="weui-input" placeholder="请选择工作年限"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">联系邮箱</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="mail" class="weui-input" placeholder="请填写邮箱地址"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            <div class="weui-form__opr-area">
+                            <button name="btn_save" class="large_button">提交</button>
+                            </div>
+                    </div>
+                </div>
+            <!--求职信息-->
+            <div id="curriculum" class="weui-tab__bd-item">
+                <div class="weui_form">
+                    <div class="weui-form__control-area">
+                        <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">期望岗位</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input name="positions" class="weui-input" placeholder="请选择期望岗位" />
+                        </div>
+                    </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">期望城市</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input id="city" class="weui-input" placeholder="请选择期望工作城市" />
+                                </div>
+                            </div>
+                    <div class="weui-cell ">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">最低薪资</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input name="salary1" class="weui-input" placeholder="请填写最低薪资（元/月）" />
+                        </div>
+                    </div>
+                            <div class="weui-cell ">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">最高薪资</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="salary2" class="weui-input" placeholder="请填写最高薪资（元/月）" />
+                                </div>
+                            </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">工作性质</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input name="category" class="weui-input" placeholder="请选择工作性质" />
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">到岗时间</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input name="prepare" class="weui-input" placeholder="请选择到岗时间"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">求职状态</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <input name="state" class="weui-input"placeholder="请选择求职状态"/>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                        <div class="weui-form__opr-area">
+                        <button name="btn_save" class="large_button">提交</button>
+                        </div>
+                </div>
+            </div>
+            <!--教育经历-->
+            <div id="education" class="weui-tab__bd-item">
+                <div class="weui_form">
+                    <div class="weui-form__control-area">
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">学校名称</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="school" class="weui-input" placeholder="请填写学校名称" />
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">入校日期</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="start" class="weui-input datePicker" placeholder="请选择入校时间"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">毕业日期</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="end" class="weui-input datePicker" placeholder="请选择毕业时间"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">最高学历</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="degree" class="weui-input" placeholder="请选择最高学历"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">所学专业</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="major" class="weui-input" placeholder="请填写所学专业"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            <div class="weui-form__opr-area">
+                                <button name="btn_save" class="large_button">提交</button>
+                            </div>
+                </div>
+            </div>
+            <!--工作经历-->
+            <div id="work" class="weui-tab__bd-item">
+                <div class="weui_form">
+                    <div class="weui-form__control-area">
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">公司名称</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="department" class="weui-input" placeholder="请填写公司名称" />
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">担任职位</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="position" class="weui-input" placeholder="请填写担任职位" />
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">入职日期</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="start" class="weui-input" placeholder="请选择入职时间"/>
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">离职日期</label>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input name="end" class="weui-input" placeholder="请选择离职时间"/>
+                                </div>
+                            </div>
+                            <div class="weui-cells__title" name="content">工作内容</div>
+                            <div class="weui-cells weui-cells_form">
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <textarea class="weui-textarea" placeholder="请描述一下岗位职责和工作业绩，让用人单位更多的了解你！" rows="3"></textarea>
+                                        <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-form__opr-area">
+                        <button name="btn_save" class="large_button">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="h60"></div>
+<div class="bottom"><!--底部导航栏-->
+    <div class="weui-tabbar">
+        <a href="jobs.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/jobs1.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">找工作</p>
+        </a>
+        <a href="curriculums.html" class="weui-tabbar__item weui-bar__item_on">
+            <img src="../../../recuitment/web/img/curriculum2.png" alt="" class="weui-tabbar__icon ">
+            <p class="weui-tabbar__label">我的简历</p>
+        </a>
+        <a href="app.html" class="weui-tabbar__item">
+            <img src="../../../recuitment/web/img/app1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的职位</p>
+        </a>
+        <a href="interviews.html" class="weui-tabbar__item ">
+            <img src="../../../recuitment/web/img/interviews1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的面试</p>
+        </a>
+        <a class="weui-tabbar__item" onclick="popupActionSheet()">
+            <img src="../../../recuitment/web/img/more1.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">…</p>
+        </a>
+    </div>
+</div>
+</body>
+<script src="../../../train/web/js/jweixin-1.4.0.js"></script>
+<script src="../../../train/web/js/jquery.min.js"></script>
+<script src="../../../train/web/wx/js/jquery-weui.js"></script>
+<script src="../../../train/web/js/jquery.params.js"></script>
+<script src="../../../train/web/js/item.js"></script>
+<script src="../../../train/web/js/fieldSet.js"></script>
+<script src="../../../train/web/js/cookie.js"></script>
+<script src="../../../train/web/wx/js/weui.js"></script>
+<script src="../../../train/web/js/interface.js"></script>
+<script src="../../../train/web/js/city.js"></script>
+<script src="../../../train/web/wx/js/city-picker1.js"></script>
+<script>
+    $(function () {
+        $("[name=degree]").select({
+            title: "请选择学历层次",
+            items: ["高中以下", "高中", "中专", "大专", "本科", "硕士","博士"]
+        });
+        $("[name=category]").select({
+            title: "请选择工作性质",
+            items: ["不限","全职", "兼职"]
+        });
+        $("[name=state]").select({
+            title: "请选择求职状态",
+            items: ["已离职，需求新工作","在职，考虑更好职位", "其他"]
+        });
+        $("[name=prepare]").select({
+            title: "请选择到岗时间",
+            items: ["随时到岗","1周以内", "3周以内","1个月以内","3个月以内","不确定"]
+        });
+        $("[name=years]").select({
+            title: "请选择工作年限",
+            items: ["1年以下","1-2年", "3-5年","6-7年","8-10年","10年以上"]
+        });
+        $("[name=positions]").select({
+            title: "请选择期望岗位",
+            multi: true,
+            max:5,
+            items: ["计算机/互联网","机械/设备/技工", "贸易/百货","化工/能源","公务员/翻译/其它","服务业","咨询/法律/教育/科研","人事/行政/高级管理","建筑/房地产","广告/市场/媒体/艺术","生物/制药/医疗/护理","生产/营运/采购/物流","会计/金融/银行/保险","销售/客服/技术支持","通信/电子"]
+        });
+        $("#city").cityPicker({//省市区三级列表
+            title:"请选择期望工作城市",
+            showDistrict: true
+        });
+        $("#native").cityPicker({//省市两级列表
+            title:"请选择籍贯",
+            showDistrict: false
+        });
+        $("#address").cityPicker({//省市区三级列表
+            title:"请选择居住城市",
+            showDistrict: true
+        });
+
+        $("[name=start]").calendar({
+            dateFormat:"yyyy-mm-dd"
+        });
+        $("[name=end]").calendar({
+            dateFormat:"yyyy-mm-dd"
+        });
+    });
+
+    function popupActionSheet() {
+        $.actions({
+            actions: [{
+                text: "工资查询",
+                onClick: function() {
+                    window.location.href = "salary.html";
+                }
+            },{
+                text: "我的积分",
+                onClick: function() {
+                    window.location.href = "score.html";
+                }
+            }]
+        });
+    }
+</script>
+</html>
